@@ -1,4 +1,3 @@
-// Card.tsx
 import "github-markdown-css/github-markdown.css";
 import "katex/dist/katex.min.css";
 
@@ -22,13 +21,13 @@ export default function Card({ index, node }: { index: number; node: Node }) {
         </h3>
         <div className="flex flex-col gap-5 md:flex-row md:items-center">
           <Image
-            src={node.ogp["og:image"]}
-            alt={node.ogp["og:title"]}
+            src={node.ogp?.["og:image"] || "/path/to/default-image.jpg"}
+            alt={node.ogp?.["og:title"] || "Default Title"}
             width={300}
             height={200}
             className="mb-[10px] mr-4 w-full md:mb-0 md:w-2/5"
           />
-          <p className="w-full text-xl md:w-[65%]">{node.ogp["og:title"]}</p>
+          <p className="w-full text-xl md:w-[65%]">{node.ogp?.["og:title"] || "No Title Available"}</p>
         </div>
         <ReactMarkdown
           className="mt-4 rounded-md border bg-white p-4"

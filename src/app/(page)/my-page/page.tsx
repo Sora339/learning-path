@@ -28,7 +28,7 @@ export default async function MyPage() {
             <h2 className="mb-[50px] text-center text-[35px] font-bold">自分の記事</h2>
             <div className="container px-[10px] py-[20px]">
               <div className="container mb-[20px]">
-                {articles.map((article) => (
+                {articles.map((article: UsersAllArticles["articles"][number]) => (
                   <div key={article.id} className="flex gap-6">
                     <Link
                       href={`/article/${article.id}`}

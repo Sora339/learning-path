@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { getOgpInfo } from "@/lib/get-ogp-info";
 import prisma from "@/lib/prisma/client";
-import { Node } from "@/types/gallery-articles";
+import { GalleryArticle, Node } from "@/types/gallery-articles";
 
 export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const { id } = params;
@@ -39,7 +39,7 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
 
   // 各記事のノードのOGP情報を取得し、データ構造を整える
   const updatedArticles = await Promise.all(
-    articles.map(async (article) => {
+    articles.map(async (article: GalleryArticle) => {
       const updatedNodes = await Promise.all(
         article.nodes.map(async (node: Node) => {
           const ogp = await getOgpInfo(node.nodeUrl);

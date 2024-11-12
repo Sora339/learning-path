@@ -18,10 +18,10 @@ export default function Article({ article }: { article: GalleryArticle }) {
 
       <Image
         className="my-[30px] h-[180px] w-full object-contain sm:mb-[10px] sm:mt-0"
-        src={article.nodes[0].ogp["og:image"]}
+        src={article.nodes[0]?.ogp?.["og:image"] || "/path/to/default-image.jpg"}
         width={153}
         height={78}
-        alt={article.nodes[0].ogp["og:title"]}
+        alt={article.nodes[0]?.ogp?.["og:title"] || "Default Title"}
       />
 
       {/* 記事タイトル */}

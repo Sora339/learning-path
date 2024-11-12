@@ -1,3 +1,4 @@
+import { Node } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 
@@ -16,7 +17,7 @@ export const GET = async (req: NextRequest, { params }: { params: { articleId: s
   if (!article) return NextResponse.json({}, { status: 404 });
 
   const updatedNodes = await Promise.all(
-    article.nodes.map(async (node) => {
+    article.nodes.map(async (node: Node) => {
       const ogp = await getOgpInfo(node.nodeUrl);
       return {
         ...node,

@@ -3,19 +3,19 @@ export type GalleryArticle = {
   title: string;
   author: {
     id: string;
-    name: string;
-    email: string;
-    emailVerified: string;
-    image: string;
+    name: string | null;
+    email: string | null;
+    emailVerified: Date | null; // Date型に修正
+    image: string | null;
   };
   authorId: string;
   category: {
-    id: number;
+    id: string; // string型に修正
     name: string;
   };
-  createdAt: string;
+  createdAt: Date; // Date型に修正
   nodes: Node[];
-  updatedAt: string;
+  updatedAt: Date; // Date型に修正
 };
 
 export type Node = {

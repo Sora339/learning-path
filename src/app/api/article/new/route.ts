@@ -1,9 +1,9 @@
-import { Node } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma/client";
+import { Node } from "@/types/gallery-articles";
 
 export const POST = async (req: NextRequest) => {
   const { title, categoryId, nodes } = await req.json();

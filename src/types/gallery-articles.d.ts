@@ -21,11 +21,12 @@ export type GalleryArticle = {
 export type Node = {
   id: number;
   articleId: number;
-  comment: string;
-  createdAt: string;
+  comment: string | null;
+  createdAt: Date; // Date型に変更
   nodeTitle: string;
   nodeUrl: string;
-  ogp: {
+  ogp?: {
+    // ogpをオプショナルにする
     "og:image": string;
     "og:site_name": string;
     "og:title": string;
@@ -33,5 +34,5 @@ export type Node = {
     "og:url": string;
   };
   order: number;
-  updatedAt: string;
+  updatedAt: Date; // Date型に変更
 };

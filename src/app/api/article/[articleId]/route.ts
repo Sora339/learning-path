@@ -1,10 +1,10 @@
-import { Node } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 
 import { authOptions } from "@/lib/auth";
 import { getOgpInfo } from "@/lib/get-ogp-info";
 import prisma from "@/lib/prisma/client";
+import { Node } from "@/types/gallery-articles";
 
 export const GET = async (req: NextRequest, { params }: { params: { articleId: string } }) => {
   const { articleId } = params;

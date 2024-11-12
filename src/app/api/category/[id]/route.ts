@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { getOgpInfo } from "@/lib/get-ogp-info";
 import prisma from "@/lib/prisma/client";
+import { Node } from "@/types/gallery-articles";
 
 export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const { id } = params;
@@ -40,7 +41,7 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
   const updatedArticles = await Promise.all(
     articles.map(async (article) => {
       const updatedNodes = await Promise.all(
-        article.nodes.map(async (node) => {
+        article.nodes.map(async (node: Node) => {
           const ogp = await getOgpInfo(node.nodeUrl);
           return {
             ...node,

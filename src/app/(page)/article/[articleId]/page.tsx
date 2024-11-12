@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: { articleId: string } }
             </div>
             <div className="flex items-center gap-3">
               <Avatar className="mx-auto size-9 border">
-                <AvatarImage src={article.author.image} className="size-9" />
+                <AvatarImage src={article.author.image ?? undefined} className="size-9" />
                 <AvatarFallback>{article.author.name}</AvatarFallback>
               </Avatar>
               <h2 className="text-lg font-semibold">{article.author.name}</h2>

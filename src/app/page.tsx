@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <>
-      <ArticleSection title="新着パス一覧" articles={articles}>
+      <ArticleSection title="新着Path一覧" articles={articles}>
         <MoreBtn />
       </ArticleSection>
       <CategorySection />

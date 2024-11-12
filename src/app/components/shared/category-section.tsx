@@ -13,7 +13,7 @@ export default async function CategorySection() {
       <div className="flex justify-center">
         <div className="w-[95%] px-[10px] py-[150px] pt-[100px] lg:w-[70%]">
           <div>
-            <h2 className="mb-[50px] text-center text-[35px] font-bold">カテゴリ一覧</h2>
+            <h2 className="mb-[50px] text-center text-[35px] font-bold">カテゴリから探す</h2>
             <div className="grid grid-cols-2 gap-7 md:grid-cols-3 lg:grid-cols-4">
               {categories.map((category) => (
                 <Link href={`/category/${category.id}`} key={category.id}>

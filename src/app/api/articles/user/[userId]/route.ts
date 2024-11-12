@@ -1,4 +1,3 @@
-import { Article } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { getOgpInfo } from "@/lib/get-ogp-info";
@@ -50,12 +49,22 @@ export const GET = async (req: NextRequest, { params }: { params: { userId: stri
 
   const hasArticle = !!article;
 
+  // articleの要素の型を定義
+  type ArticleElement = {
+    id: number;
+    title: string;
+    authorId: string;
+    categoryId: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
   let articles: UsersAllArticles["articles"] = [];
 
   if (hasArticle) {
-    //  UsersAllArticles.articles を作成
+    // UsersAllArticles.articles を作成
     articles = await Promise.all(
-      article.map(async (val: Article) => {
+      article.map(async (val: ArticleElement) => {
         const firstNode = await prisma.node.findFirst({
           // 最初のnodeを取得
           orderBy: { order: "asc" },
@@ -66,16 +75,8 @@ export const GET = async (req: NextRequest, { params }: { params: { userId: stri
           },
           where: { articleId: val.id },
         });
+
         const ogpUrl: string = firstNode?.nodeUrl ? await getOgpInfo(firstNode.nodeUrl) : ""; // そこから最初のogp取得
-
-        // const authorInfo = await prisma.user.findUnique({   // ほしかったらコメントアウト解除して(下も)
-        //   select: {
-        //     name: true,
-        //     image: true,
-        //   },
-        //   where: { id: val.authorId },
-
-        // });
 
         const category = await prisma.category.findUnique({
           select: { name: true, image: true },
@@ -83,14 +84,16 @@ export const GET = async (req: NextRequest, { params }: { params: { userId: stri
         });
 
         return {
-          ...val, // id, authorId, createdAt, updatedAt, title, categoryId
+          id: val.id,
+          title: val.title,
+          categoryId: val.categoryId,
           categoryImage: category?.image ?? "",
-          // authorImage: authorInfo?.image ?? "",
-          // authorName: authorInfo?.name ?? "",
           categoryName: category?.name ?? "",
+          createdAt: val.createdAt,
           firstComment: firstNode?.comment ?? "",
           firstOgp: ogpUrl,
           firstTitle: firstNode?.nodeTitle ?? "",
+          updatedAt: val.updatedAt,
         };
       }),
     );

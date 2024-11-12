@@ -1,3 +1,4 @@
+import { Article } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { getOgpInfo } from "@/lib/get-ogp-info";
@@ -54,7 +55,7 @@ export const GET = async (req: NextRequest, { params }: { params: { userId: stri
   if (hasArticle) {
     //  UsersAllArticles.articles を作成
     articles = await Promise.all(
-      article.map(async (val) => {
+      article.map(async (val: Article) => {
         const firstNode = await prisma.node.findFirst({
           // 最初のnodeを取得
           orderBy: { order: "asc" },

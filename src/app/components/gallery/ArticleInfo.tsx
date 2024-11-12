@@ -9,10 +9,10 @@ export default function ArticleInfo({ article }: { article: GalleryArticle }) {
     <div className="mb-[10px] flex items-center justify-between">
       <div className="flex items-center gap-3">
         <Avatar className="size-9 border">
-          <AvatarImage src={article.author.image} alt="ユーザー画像" className="size-9" />
-          <AvatarFallback>{article.author.name.charAt(0)}</AvatarFallback>
+          <AvatarImage src={article.author.image ?? undefined} className="size-9" />
+          <AvatarFallback>{(article.author.name ?? "N/A").charAt(0)}</AvatarFallback>
         </Avatar>
-        <p className="text-[15px]">{article.author.name}</p>
+        <p className="text-[15px]">{article.author.name ?? "匿名ユーザー"}</p>
       </div>
       <div className="flex items-center gap-2">
         <Timer size={18} />
